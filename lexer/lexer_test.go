@@ -14,6 +14,11 @@ func init() {
 	testMap["\"\""] = Token{Token_String, "\"\""}
 	testMap["\"\rasdf\""] = Token{Token_String, "\"\rasdf\""}
 	testMap[" \" asd\" "] = Token{Token_String, "\" asd\""}
+	testMap["-1"] = Token{Token_Number, "-1"}
+	testMap["12"] = Token{Token_Number, "12"}
+	testMap["-1.2"] = Token{Token_Number, "-1.2"}
+	testMap["-1.0.e+12"] = Token{Token_Number, "-1.0.e+12"}
+	testMap["-0.1e+1"] = Token{Token_Number, "-0.1e+1"}
 
 	multiTokenMap["false \"jfk\n\" "] = []Token{
 		Token{Token_Bool, "false"},
@@ -46,10 +51,10 @@ func TestStringToken(t *testing.T) {
 		var inputString string = key
 		reader := strings.NewReader(inputString)
 		jsonLexer, _ := New(reader)
-		token, _ := jsonLexer.NextToken()
-
+		token, err := jsonLexer.NextToken()
+		fmt.Println(err)
 		if token.Type != testToken.Type {
-			t.Error("token type not string", token.Value)
+			t.Error("expected token type", testToken.Type, "but got ", token.Type)
 		}
 
 		if token.Value != testToken.Value {

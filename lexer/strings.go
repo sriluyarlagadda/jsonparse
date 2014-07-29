@@ -90,3 +90,17 @@ L:
 	}
 	return Token{}, false, nil
 }
+
+func isUniCodeChar(char rune) bool {
+	if char != '"' && char != '\\' && char != '/' {
+		return true
+	}
+	return false
+}
+
+func isBackSlash(char rune) bool {
+	if char == '\\' {
+		return true
+	}
+	return false
+}
