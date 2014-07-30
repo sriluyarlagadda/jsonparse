@@ -1,4 +1,4 @@
 jsonparse
 =========
 
-An attempt to learn basic compiler techniques by writing a JSON parser
+An attempt to learn basic compiler techniques by writing a JSON parser(Work in Progress)
